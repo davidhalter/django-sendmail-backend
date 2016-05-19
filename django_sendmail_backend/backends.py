@@ -31,7 +31,7 @@ class EmailBackend(BaseEmailBackend):
             return False
         try:
             # -t: Read message for recipients
-            ps = Popen(['/usr/sbin/sendmail'] + recipients, stdin=PIPE, stderr=PIPE)
+            ps = Popen(['/usr/sbin/sendmail', '-t'] + recipients, stdin=PIPE, stderr=PIPE)
             ps.stdin.write(email_message.message().as_bytes())
             (stdout, stderr) = ps.communicate()
         except:
